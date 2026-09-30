@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>enclose.goat - The Impossible Pasture Puzzle</title>
+  <meta name="description" content="A playful pasture puzzle game inspired by enclose.horse. Build any fence you want, but with Barnaby the Goat, you can NEVER win!">
+  
+  <!-- Goat Emoji Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐐</text></svg>">
+
+  <!-- Modern Google Fonts: Outfit and Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="logo-wrapper">
+          <span class="goat-emoji">🐐</span>
+          <h1 class="logo-title">enclose<span class="logo-accent">.goat</span></h1>
+        </div>
+        <p class="tagline">The pasture puzzle where caprine physics always win. <em>You can never win.</em></p>
+      </div>
+      <div class="header-right">
+        <button id="sound-toggle" class="header-btn" title="Toggle Sound">🔊 Sound: ON</button>
+        <button id="codex-btn" class="header-btn codex-trigger-btn" title="View Discovered Goat Escapes">📖 Escape Codex (<span id="escapes-count">0 / 10</span>)</button>
+      </div>
+    </header>
+
+    <!-- Main Game Board & Control Panel Layout -->
+    <main class="main-layout">
+      <!-- Left Column: Pasture Canvas & Toolbar -->
+      <section class="game-section">
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <div class="status-pill">
+            <span class="pill-label">FENCE POSTS:</span>
+            <span id="fence-budget" class="pill-value">0 / 16</span>
+          </div>
+          <div id="perimeter-status" class="status-badge status-open">
+            ⚠️ Perimeter: Leaking like a sieve (Open Hole)
+          </div>
+          <div class="level-select-wrapper">
+            <select id="level-select" class="custom-select" title="Choose Pasture Level"></select>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div id="canvas-container" class="canvas-wrapper">
+          <canvas id="game-canvas"></canvas>
+        </div>
+
+        <!-- Building Tools Bar -->
+        <div class="toolbar">
+          <div class="tool-group">
+            <button id="tool-fence" class="tool-btn active" title="Place Wooden Fence (Click/Drag)">
+              <span class="tool-icon">🔨</span> Place Fence
+            </button>
+            <button id="tool-erase" class="tool-btn" title="Erase Fence (Or Right-Click)">
+              <span class="tool-icon">🪓</span> Erase
+            </button>
+          </div>
+
+          <div class="tool-group">
+            <button id="clear-btn" class="tool-btn secondary" title="Clear all fences">
+              <span>🧹</span> Clear All
+            </button>
+            <button id="reset-btn" class="tool-btn secondary" title="Return goat to start">
+              <span>🔄</span> Reset Goat
+            </button>
+            <button id="random-btn" class="tool-btn secondary" title="Generate procedural pasture">
+              <span>🎲</span> Random Map
+            </button>
+          </div>
+        </div>
+
+        <!-- Big Submit Action Button -->
+        <div class="submit-container">
+          <button id="submit-btn" class="primary-submit-btn">
+            🔒 TEST ENCLOSURE (SUBMIT)
+          </button>
+          <div class="submit-hint">Click & drag on the grass to build fences. Once sealed, hit Submit to test the perimeter!</div>
+        </div>
+      </section>
+
+      <!-- Right Column: Farmer's Despair Dashboard & Escape Inspector -->
+      <aside class="dashboard-section">
+        <!-- Farmer Rage Tracker -->
+        <div class="card rage-card">
+          <div class="card-header">
+            <span class="card-icon">👨‍🌾</span>
+            <h2 class="card-title">Farmer Rage Meter</h2>
+          </div>
+          <div class="rage-bar-container">
+            <div id="rage-bar" class="rage-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div id="rage-label" class="rage-status-text">Farmer Rage: Calm & In Denial (0 Escapes)</div>
+        </div>
+
+        <!-- Farmer's Logbook -->
+        <div class="card log-card">
+          <div class="card-header">
+            <span class="card-icon">📜</span>
+            <h2 class="card-title">Farmer's Daily Journal</h2>
+          </div>
+          <div id="farmer-log-content" class="log-content">
+            <div class="log-entry">
+              <div class="log-badge">🌱 Day 1 on the Farm</div>
+              <p class="log-quote">"Bought a prize goat named Barnaby. Built a nice pine fence. He is looking at me like he understands non-Euclidean geometry. Surely it's fine."</p>
+              <div class="log-footer">Days Since Last Goat Escape: <span class="zero-strike"><s>1</s> 0</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testing / Sandbox Controls -->
+        <div class="card sandbox-card">
+          <div class="card-header">
+            <span class="card-icon">🧪</span>
+            <h2 class="card-title">Escape Tester (Sandbox)</h2>
+          </div>
+          <p class="sandbox-desc">Once enclosed, the goat randomly picks an infuriating escape. You can also force a specific technique:</p>
+          <div class="select-row">
+            <select id="force-escape-select" class="custom-select full-width"></select>
+          </div>
+        </div>
+
+        <!-- How It Works Card -->
+        <div class="card info-card">
+          <div class="card-header">
+            <span class="card-icon">💡</span>
+            <h2 class="card-title">Caprine Field Rules</h2>
+          </div>
+          <ul class="rules-list">
+            <li><strong>Build Any Fence:</strong> Click and drag to place sturdy wooden posts.</li>
+            <li><strong>Natural Barriers:</strong> Ponds and boulders can't be fenced over, but block movement.</li>
+            <li><strong>The Inevitable:</strong> If there's an open gap, the goat walks out. If completely sealed, goats can spawn portals, munch cedar, or defy gravity!</li>
+            <li><strong>Direction of Freedom:</strong> Once on the move, the goat refuses to return the way it came.</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Escape Codex Modal -->
+    <div id="codex-modal" class="modal-backdrop hidden">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-icon">📖</span>
+            <h2>The Farmer's Codex of Caprine Escapes</h2>
+          </div>
+          <button id="close-codex-btn" class="close-btn" title="Close Codex">&times;</button>
+        </div>
+        <p class="modal-subtitle">Catalogue of all known supernatural and infuriating ways Barnaby has defeated agricultural containment.</p>
+        <div id="codex-grid" class="codex-grid">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="audio.js"></script>
+  <script src="escapes.js"></script>
+  <script src="levels.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
