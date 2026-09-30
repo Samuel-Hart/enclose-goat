@@ -4,7 +4,7 @@ class EncloseGoatGame {
   constructor() {
     this.canvas = document.getElementById('game-canvas');
     this.ctx = this.canvas.getContext('2d');
-    
+
     // Level & Grid State
     this.gridSize = 9;
     this.tileSize = 64;
@@ -12,7 +12,7 @@ class EncloseGoatGame {
     this.currentLevel = PRESET_LEVELS[0];
     this.fenceBudget = 16;
     this.fencesPlaced = 0;
-    
+
     // Tools: 'fence' or 'erase'
     this.currentTool = 'fence';
     this.isMouseDown = false;
@@ -43,7 +43,7 @@ class EncloseGoatGame {
     this.escapesWitnessed = JSON.parse(localStorage.getItem('enclose_goat_escapes') || '[]');
     this.farmerRage = parseInt(localStorage.getItem('enclose_goat_rage') || '0', 10);
     this.forcedEscape = 'random'; // or specific id from select
-    
+
     // Animation & particles
     this.animController = new EscapeAnimationController(this);
     this.lastTime = performance.now();
@@ -160,7 +160,7 @@ class EncloseGoatGame {
     const container = document.getElementById('canvas-container');
     const maxDimension = Math.min(container.clientWidth || 600, 680);
     this.tileSize = Math.floor(maxDimension / this.gridSize);
-    
+
     const displayWidth = this.tileSize * this.gridSize;
     const displayHeight = this.tileSize * this.gridSize;
 
@@ -175,7 +175,7 @@ class EncloseGoatGame {
   resetGoat(x = null, y = null) {
     const startX = x !== null ? x : (this.currentLevel.goatStart ? this.currentLevel.goatStart.x : Math.floor(this.gridSize / 2));
     const startY = y !== null ? y : (this.currentLevel.goatStart ? this.currentLevel.goatStart.y : Math.floor(this.gridSize / 2));
-    
+
     this.goat.x = startX;
     this.goat.y = startY;
     this.goat.drawX = startX;
@@ -389,7 +389,7 @@ class EncloseGoatGame {
     if (this.rageBar) {
       this.rageBar.style.width = `${ragePercent}%`;
     }
-    
+
     let title = "Calm & In Denial";
     if (this.farmerRage >= 10) title = "Cosmic Caprine Psychosis (Max Rage)";
     else if (this.farmerRage >= 8) title = "Snapped Pitchforks & Despair";
@@ -1171,7 +1171,7 @@ class EncloseGoatGame {
         <div class="log-entry">
           <div class="log-badge">${escapeData.icon} ${escapeData.title}</div>
           <p class="log-quote">${escapeData.farmerLog}</p>
-          <div class="log-footer">Days Since Last Goat Escape: <span class="zero-strike"><s>1</s> 0</span></div>
+          <div class="log-footer">Days Since Last Goat Escape: <span class="zero-strike">0</span></div>
         </div>
       `;
     }

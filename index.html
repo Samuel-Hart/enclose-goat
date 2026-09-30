@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>enclose.goat - The Impossible Pasture Puzzle</title>
-  <meta name="description" content="A playful pasture puzzle game inspired by enclose.horse. Build any fence you want, but with Barnaby the Goat, you can NEVER win!">
-  
+  <meta name="description"
+    content="A playful pasture puzzle game inspired by enclose.horse. Build any fence you want, but with Barnaby the Goat, you can NEVER win!">
+
   <!-- Goat Emoji Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐐</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐐</text></svg>">
 
   <!-- Modern Google Fonts: Outfit and Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="app-container">
     <!-- Top Navigation Header -->
@@ -29,7 +35,8 @@
       </div>
       <div class="header-right">
         <button id="sound-toggle" class="header-btn" title="Toggle Sound">🔊 Sound: ON</button>
-        <button id="codex-btn" class="header-btn codex-trigger-btn" title="View Discovered Goat Escapes">📖 Escape Codex (<span id="escapes-count">0 / 10</span>)</button>
+        <button id="codex-btn" class="header-btn codex-trigger-btn" title="View Discovered Goat Escapes">📖 Escape Codex
+          (<span id="escapes-count">0 / 10</span>)</button>
       </div>
     </header>
 
@@ -85,7 +92,8 @@
           <button id="submit-btn" class="primary-submit-btn">
             🔒 TEST ENCLOSURE (SUBMIT)
           </button>
-          <div class="submit-hint">Click & drag on the grass to build fences. Once sealed, hit Submit to test the perimeter!</div>
+          <div class="submit-hint">Click & drag on the grass to build fences. Once sealed, hit Submit to test the
+            perimeter!</div>
         </div>
       </section>
 
@@ -112,8 +120,9 @@
           <div id="farmer-log-content" class="log-content">
             <div class="log-entry">
               <div class="log-badge">🌱 Day 1 on the Farm</div>
-              <p class="log-quote">"Bought a prize goat named Barnaby. Built a nice pine fence. He is looking at me like he understands non-Euclidean geometry. Surely it's fine."</p>
-              <div class="log-footer">Days Since Last Goat Escape: <span class="zero-strike"><s>1</s> 0</span></div>
+              <p class="log-quote">"Bought a prize goat named Barnaby. Built a nice pine fence. He is looking at me like
+                he understands non-Euclidean geometry. Surely it's fine."</p>
+              <div class="log-footer">Days Since Last Goat Escape: <span class="zero-strike">0</span></div>
             </div>
           </div>
         </div>
@@ -124,7 +133,8 @@
             <span class="card-icon">🧪</span>
             <h2 class="card-title">Escape Tester (Sandbox)</h2>
           </div>
-          <p class="sandbox-desc">Once enclosed, the goat randomly picks an infuriating escape. You can also force a specific technique:</p>
+          <p class="sandbox-desc">Once enclosed, the goat randomly picks an infuriating escape. You can also force a
+            specific technique:</p>
           <div class="select-row">
             <select id="force-escape-select" class="custom-select full-width"></select>
           </div>
@@ -139,8 +149,10 @@
           <ul class="rules-list">
             <li><strong>Build Any Fence:</strong> Click and drag to place sturdy wooden posts.</li>
             <li><strong>Natural Barriers:</strong> Ponds and boulders can't be fenced over, but block movement.</li>
-            <li><strong>The Inevitable:</strong> If there's an open gap, the goat walks out. If completely sealed, goats can spawn portals, munch cedar, or defy gravity!</li>
-            <li><strong>Direction of Freedom:</strong> Once on the move, the goat refuses to return the way it came.</li>
+            <li><strong>The Inevitable:</strong> If there's an open gap, the goat walks out. If completely sealed, goats
+              can spawn portals, munch cedar, or defy gravity!</li>
+            <li><strong>Direction of Freedom:</strong> Once on the move, the goat refuses to return the way it came.
+            </li>
           </ul>
         </div>
       </aside>
@@ -156,7 +168,8 @@
           </div>
           <button id="close-codex-btn" class="close-btn" title="Close Codex">&times;</button>
         </div>
-        <p class="modal-subtitle">Catalogue of all known supernatural and infuriating ways Barnaby has defeated agricultural containment.</p>
+        <p class="modal-subtitle">Catalogue of all known supernatural and infuriating ways Barnaby has defeated
+          agricultural containment.</p>
         <div id="codex-grid" class="codex-grid">
           <!-- Populated dynamically via JS -->
         </div>
@@ -170,4 +183,5 @@
   <script src="levels.js"></script>
   <script src="game.js"></script>
 </body>
+
 </html>
