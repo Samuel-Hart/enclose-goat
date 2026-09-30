@@ -2,6 +2,8 @@
 
 A clone of the classic logic puzzle [enclose.horse](https://enclose.horse), except **with Goat, you can NEVER win.**
 
+👉 **Play the Live Game**: **[https://samuel-hart.github.io/enclose-goat/](https://samuel-hart.github.io/enclose-goat/)**
+
 ---
 
 ## 🌾 The Premise
